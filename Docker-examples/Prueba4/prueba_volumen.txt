@@ -1,0 +1,67 @@
+version: "3.9"
+services:
+  app-postgres-db:
+    image: postgres:14.5-alpine
+    hostname: app-postgres-db
+    container_name: app-postgres-db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - postgres-database:/var/lib/postgresql/data  #$PWD/postgres-database:/var/lib/postgresql/data/   #./postgres_data:/var/lib/postgresql/data
+    ports:
+      -  5455:5432
+volumes:
+  postgres-database:
+    external: true
+
+
+Método Original:
+
+version: "3.9"
+services:
+  app-postgres-db:
+    image: postgres:14.5-alpine
+    hostname: app-postgres-db
+    container_name: app-postgres-db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - ./postgres-database:/var/lib/postgresql/data #$PWD/postgres-database:/var/lib/postgresql/data/   #./postgres_data:/var/lib/postgresql/data
+    ports:
+      -  5455:5432
+
+
+
+
+claro perfecto! mi docker-compose.yml me quedó así:
+
+# Docker-compose.yml
+
+version: "3.9"
+services:
+  app-postgres-db:
+    image: postgres:14.5-alpine
+    hostname: app-postgres-db
+    container_name: app-postgres-db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - ./postgres-database:/var/lib/postgresql/data
+    ports:
+      -  5455:5432
+volumes:
+  postgres-database:
+    external: true
+
+
+
+
+
+
+
+
+
+

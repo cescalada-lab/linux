@@ -1,0 +1,9 @@
+FROM alpine:3.16.2
+
+WORKDIR /home/
+
+ADD uno.py uno.py
+
+RUN apk add --update --no-cache python3
+
+CMD ["python3" , "uno.py"]

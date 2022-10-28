@@ -1,0 +1,14 @@
+version: "3.9"
+services:  #aca se van a poner la cantidad de servicios a levantar
+  alpine-with-python:
+    image: christianboanerges/alpine-with-python:Version2-Python3
+    hostname: alpine-with-python
+    container_name: alpine-with-python
+    ports:
+      - 8000:8000
+  hello-world:
+    image: library/hello-world:latest
+    hostname: hello-world
+    container_name: hello-world
+    ports:
+      - 8080:8080

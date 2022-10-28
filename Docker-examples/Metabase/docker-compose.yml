@@ -1,0 +1,55 @@
+### aca vamos a con metabase 2 bases de datos , un serviidor de correo electronico
+### codigo de ejemplo metabase: hora en el video: 1° 58" 
+
+version: "3.9"
+services:  #aca se van a poner la cantidad de servicios a levantar
+  metabase:
+    image: metabase/metabase:v0.44.4   #ubicacion de la imagen a levantar en este caso de metabase
+    networks:
+      - network-test-itba
+    ports:
+      - 3000:3000 # a los otros no le pongo puerto xq no quiero verlos
+    hostname: metabase
+    container_name: metabase
+    enviroment: #variables de entorno, se leen cuando se inicializa todo y el servicio que innicializa se va a los otros srvcios.
+      - MB_DB_DBNAME= postgres  # sería app-db que tiene postgres 14.5-alpine (la de abajo)
+      - MB_DB_HOST= app-db #este es el nombre de la imagen que contiene postgres
+      - MB_DB_PASS= password1
+      - MB_DB_PORT= 5432 # este es el puerto standard de postgres, el que siempre tuvo
+      - MB_DB_TYPE= postgres # este es una configuracion que tiene metabase en su dockerhub privado video 2°08'30"
+      - MB_DB_USER= usuario1
+  app-db:
+    image: postgres:14.5-alpine
+    networks:
+      - network-test-itba
+    hostname: app-db
+    container_name: app-db
+    environment:
+      - POSTGRES_PASSWORD=password1
+      - POSTGRES_USER= usuario1
+    volumes:
+      - $PWD/postgres-database:/var/lib/postgresql/data/  #mapeamos/copiamos la data de la imagen a una carpeta local
+  data-db:
+    image: metabase/qa-databases:mysql-sample-8
+    networks:
+      - network-test-itba
+    hostname: data-db
+    container_name: data-db
+  maildev:
+    image: maildev/maildev:2.0.5
+    networks:
+      - network-test-itba
+    ports:
+      -  8080:1080 # el puerto 8080 mio es equivalante al peurto 1080 del contenedor maildev
+    hostname: maildev
+    container_name: maildev
+
+networks:
+  network-test-itba:
+    name: network-test-itba
+
+     
+
+
+
+## me quede en 2°20"

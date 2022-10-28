@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  uno-image:
+    image: uno-image:v1.0  #imagen local
+    hostname: uno-image
+    container_name: uno-image
+  dos-image:
+    image: dos-image:v1.0  #imagen local
+    hostname: dos-image
+    container_name: dos-image

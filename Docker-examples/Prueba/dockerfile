@@ -1,0 +1,11 @@
+## LA FORMA DE INSTALAR PYTHON A LA VIEJA USANSA:
+
+FROM alpine:3.16.2
+
+WORKDIR /home/
+
+ADD main.py main.py
+
+RUN apk add --update --no-cache python3
+
+CMD ["python3" , "main.py"]
